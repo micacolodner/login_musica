@@ -18,6 +18,7 @@ datosUsuario user5 = datosUsuario(email: 'noesaid@gmail.com', password: 'EFGH', 
 class _loginState extends State<Login> {
   final TextEditingController inputEmail = TextEditingController();
   final TextEditingController inputPassword = TextEditingController();
+  bool _obscureText = true;
 
   void confirmacion () { 
     List<datosUsuario> users = [user1, user2, user3, user4, user5];
@@ -37,6 +38,7 @@ class _loginState extends State<Login> {
       return Scaffold(
         appBar: AppBar(
         title: const Text("Login"),
+        centerTitle: true,
       ),
         body: Center(
           child: Padding(
@@ -59,10 +61,20 @@ class _loginState extends State<Login> {
 
                   TextField( //creo la cajita de la contraseña
                     controller: inputPassword,
-                    obscureText: true,
+                    obscureText: _obscureText,
                     decoration: InputDecoration(
                       hintText: 'Ingrese su contraseña',
                       border: OutlineInputBorder(),
+                      suffixIcon: IconButton(
+                        icon: Icon (
+                          _obscureText ? Icons.visibility_off : Icons.visibility,
+                        ),
+                        onPressed: (){
+                          setState((){
+                            _obscureText = !_obscureText;
+                          });
+                        },
+                      )
                     ),
                   ),
 
