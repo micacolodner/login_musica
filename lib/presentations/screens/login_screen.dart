@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:login_musica/entities/product.dart';
+import 'package:login_musica/entities/album.dart';
+import 'package:login_musica/entities/datos_usuario.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
-
+  
   @override
   State<Login> createState() => _loginState();
 }
@@ -13,14 +14,14 @@ Datos user2 = Datos(email: 'tomicolodner@gmail.com', password: '5678', nombre: '
 Datos user3 = Datos(email: 'lola@gmail.com', password: 'ORT', nombre: 'Lola', direccion: 'Caballito');
 Datos user4 = Datos(email: 'sebcol@gmail.com', password: 'ABCD', nombre: 'Sebastian', direccion: 'Villa Crespo');
 Datos user5 = Datos(email: 'noesaid@gmail.com', password: 'EFGH', nombre: 'Noelia', direccion: 'Palermo');
-
+Datos user6 = Datos(email: 'a', password: 'a', nombre: 'mica', direccion: 'ORT');
 
 class _loginState extends State<Login> {
   final TextEditingController inputEmail = TextEditingController();
   final TextEditingController inputPassword = TextEditingController();
-
+  bool _obscureText = true;
   void confirmacion () { 
-    List<Datos> users = [user1, user2, user3, user4, user5];
+    List<Datos> users = [user1, user2, user3, user4, user5, user6];
     for (var user in users) {
       if (inputEmail.text == user.email && inputPassword.text == user.password) {
         context.push('/home', extra: user);
@@ -36,7 +37,8 @@ class _loginState extends State<Login> {
     Widget build(BuildContext context){
       return Scaffold(
         appBar: AppBar(
-        title: const Text("Login"),
+        title: const Text("LOGIN"),
+        centerTitle: true,
       ),
         body: Center(
           child: Padding(
@@ -59,10 +61,20 @@ class _loginState extends State<Login> {
 
                   TextField( //creo la cajita de la contraseña
                     controller: inputPassword,
-                    obscureText: true,
+                    obscureText: _obscureText,
                     decoration: InputDecoration(
                       hintText: 'Ingrese su contraseña',
                       border: OutlineInputBorder(),
+                      suffixIcon: IconButton(
+                        icon: Icon (
+                          _obscureText ? Icons.visibility_off : Icons.visibility,
+                        ),
+                        onPressed: (){
+                          setState((){
+                            _obscureText = !_obscureText;
+                          });
+                        },
+                      )
                     ),
                   ),
 

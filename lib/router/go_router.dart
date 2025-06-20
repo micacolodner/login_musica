@@ -1,8 +1,8 @@
 import 'package:go_router/go_router.dart';
-import 'package:login_musica/router/go_router.dart';
-import 'package:login_musica/presentation/screens/home_screen.dart';
-import 'package:login_musica/presentation/screens/login_screen.dart';
-import 'package:login_musica/entities/datosUsuario.dart';
+import 'package:login_musica/presentations/screens/album_detail.dart';
+import 'package:login_musica/presentations/screens/home_screen.dart';
+import 'package:login_musica/presentations/screens/login_screen.dart';
+import 'package:login_musica/entities/datos_usuario.dart';
 
 final appRouter = GoRouter(
   initialLocation: '/login', //pantalla en la que empieza
@@ -13,9 +13,11 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/home',
       builder: (context, state) {
-        final user = state.extra as datosUsuario;
+        final user = state.extra as Datos;
         return Home(user: user);
       },
     ),
+
+    GoRoute(path: '/album_detail', builder: (context, state) => AlbumDetail()),
   ],
 );

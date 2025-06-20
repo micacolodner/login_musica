@@ -1,4 +1,4 @@
-class Album{
+class Albums{
   String title;
   String singer;
   String year;
@@ -6,7 +6,7 @@ class Album{
   
 
 
-  Album ({
+  Albums ({
     required this.title,
     required this.singer,
     required this.year,
