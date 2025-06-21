@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:login_musica/entities/album.dart';
 import 'package:login_musica/entities/datos_usuario.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:login_musica/presentations/providers.dart';
@@ -16,6 +17,18 @@ class _AlbumDetailState extends ConsumerState<AlbumDetail> {
   final TextEditingController inputSinger = TextEditingController();
   final TextEditingController inputYear = TextEditingController();
   final TextEditingController inputPoster = TextEditingController();
+
+   void _add() {
+    final newAlbum = Albums(
+      title: inputTitle.text,
+      singer: inputSinger.text,
+      year: inputYear.text,
+      poster: inputPoster.text,
+      );
+
+    ref.read(AlbumProvider.notifier).addAlbum(newAlbum);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +83,7 @@ class _AlbumDetailState extends ConsumerState<AlbumDetail> {
                       inputTitle.text != '' &&
                       inputSinger.text != '' &&
                       inputYear.text != '') {
+                    _add();
                     context.pop('/home');
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
